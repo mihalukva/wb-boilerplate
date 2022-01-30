@@ -1,0 +1,1 @@
+export * as addComponent from './add-component'
