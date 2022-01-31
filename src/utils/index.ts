@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { template, camelCase, upperFirst, kebabCase } from 'lodash';
+import { camelCase, upperFirst } from 'lodash';
 
 export const pascalCase = (text: string) => upperFirst(camelCase(text));
 
@@ -51,4 +51,12 @@ export const writeFile = async (fileName: string, content: string) => {
     const uint8Array = new Uint8Array(buffer);
     const componentFile = vscode.Uri.file(fileName);
     return await vscode.workspace.fs.writeFile(componentFile, uint8Array);
+}
+
+export const getWorkspaceDir = async (uri: vscode.Uri) => {
+    const { fsPath } = uri;
+    const stat = await vscode.workspace.fs.stat(uri);
+    const isFile = stat.type === vscode.FileType.File;
+    const workspaceDir = isFile ? path.parse(fsPath).dir : fsPath;
+    return workspaceDir;
 }
