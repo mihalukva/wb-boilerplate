@@ -13,6 +13,9 @@ There is no need to config an extension
 
 ## Release Notes
 
+### 0.1.1
+
+Bugfix.
 ### 0.1.0
 
 First release.
